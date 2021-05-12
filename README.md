@@ -1,3 +1,2 @@
-# my prj
+# myprj
 a fritzing clone
-___
