@@ -1,0 +1,23 @@
+{
+  "name": "myprj",
+  "version": "1.0.0",
+  "description": "a fritzing clone",
+  "main": "main.js",
+  "dependencies": {
+    "electron": "^12.0.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/makerio90/myprj.git"
+  },
+  "author": "makerio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/makerio90/myprj/issues"
+  },
+  "homepage": "https://github.com/makerio90/myprj#readme"
+}
