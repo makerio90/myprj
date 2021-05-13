@@ -12,14 +12,14 @@ function createWindow () {
     index.loadFile('index.html')
 }
 function new_prj_window () {
-    const index = new BrowserWindow({
+    const new_prj_window = new BrowserWindow({
         width: 800,
         height: 600,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
         }
     })
-    index.loadFile('new.html')
+    new_prj_window.loadFile('new.html')
 }
 const template = [
     {

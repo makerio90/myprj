@@ -4,6 +4,7 @@
     <link    href="./halfmoon-1.1.1/css/halfmoon-variables.min.css" rel="stylesheet" />
     <script  src="./halfmoon-1.1.1/js/halfmoon.min.js"></script>
     <script  src="./jszip/dist/jszip.min.js"></script>
+    <script  src="./index.js"></script>
     <meta charset="UTF-8">
     <title>myprj</title>
 </head>
@@ -11,11 +12,19 @@
     <div class="page-wrapper with-navbar with-sidebar" data-sidebar-type="overlayed-sm-and-down">
         <div class="sticky-alerts"></div>
         <nav class="navbar">
+            <div class="custom-file d-flex">
+                <input type="file" id="prj-input-1">
+                <label for="prj-input-1">Choose a file</label>
+            </div>
+            <button class="btn btn-danger" onclick="go()" type="button">go</button>
         </nav>
         <div class="sidebar-overlay" onclick="halfmoon.toggleSidebar()"></div>
         <div class="sidebar">
         </div>
         <div class="content-wrapper">
+            <div id="_instructions">
+                
+            </div>
         </div>
     </div>
 </body>
