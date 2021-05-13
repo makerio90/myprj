@@ -9,7 +9,7 @@ function go() {
                     .then(
                         function (content) {
                             document.getElementById('_instructions').innerHTML =
-                                content;
+                                marked(content);
                         },
                         function (e) {
                             halfmoon.initStickyAlert({
