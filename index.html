@@ -6,18 +6,25 @@
     <script src="./jszip/dist/jszip.min.js"></script>
     <script src="./index.js"></script>
     <script src="./marked-master/marked.min.js"></script>
+    <script src="./switch.js"></script>
     <meta charset="UTF-8">
     <title>myprj</title>
 </head>
 <body data-dm-shortcut-enabled="true" data-sidebar-shortcut-enabled="true"  data-set-preferred-mode-onload="true">
     <div class="page-wrapper with-navbar with-sidebar" data-sidebar-type="overlayed-sm-and-down">
         <div class="sticky-alerts"></div>
-        <nav class="navbar">
-            <div class="custom-file d-flex">
+        <nav class="navbar justify-content-between">
+            <div class="custom-file d-flex mr-10">
                 <input type="file" id="prj-input-1">
                 <label for="prj-input-1">Choose a file</label>
             </div>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button class="btn" type="button">Left</button>
+                <button class="btn" type="button">Middle</button>
+                <button class="btn" type="button">Right</button>
+            </div>
             <button class="btn btn-danger" onclick="go()" type="button">go</button>
+            
         </nav>
         <div class="sidebar-overlay" onclick="halfmoon.toggleSidebar()"></div>
         <div class="sidebar">
@@ -25,6 +32,27 @@
         <div class="content-wrapper">
             <div id="_instructions">
                 
+            </div>
+            <div id="_images">
+
+            </div>
+            <div id="_code">
+
+            </div>
+            <div id="_3d">
+
+            </div>
+            <div id="_pcbs">
+
+            </div>
+            <div id="_sch">
+
+            </div>
+            <div id="_bom">
+
+            </div>
+            <div id="_info">
+
             </div>
         </div>
     </div>
