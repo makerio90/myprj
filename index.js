@@ -19,6 +19,35 @@ function go() {
                             });
                         }
                     );
+                zip.file('OBJECT.json')
+                    .async('string')
+                    .then(
+                        function (content) {
+                            var obj = JSON.parse(content);
+                            document.getElementById('info-title').innerHTML =
+                                obj.title;
+                            document.getElementById(
+                                'info-description'
+                            ).innerHTML = obj.description;
+                            obj.price =
+                                obj.priceformat +
+                                obj.price[0] +
+                                ' - ' +
+                                obj.priceformat +
+                                obj.price[1];
+                            document.getElementById('info-price').innerHTML =
+                                obj.price;
+                            document.getElementById('info-date').innerHTML =
+                                obj.date;
+                        },
+                        function (e) {
+                            halfmoon.initStickyAlert({
+                                content: e,
+                                title: 'error getting instructions',
+                                alertType: 'alert-danger',
+                            });
+                        }
+                    );
             },
             function (e) {
                 halfmoon.initStickyAlert({
