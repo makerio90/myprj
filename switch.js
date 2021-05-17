@@ -1,7 +1,7 @@
 function _switch(i) {
     var pages = ["_instructions", "_images", "_code", "_3d", "_pcbs", "_sch", "_bom", "_info"]
     for (let index = 0; index < pages.length; index++) {
-        const element = array[index];
+        const element = pages[index];
         switch_visibility(element, false)
     }
     switch_visibility("_" + i, true)
