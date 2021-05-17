@@ -1,0 +1,1 @@
+function _switch(i){var t=["_instructions","_images","_code","_3d","_pcbs","_sch","_bom","_info"];for(let i=0;i<t.length;i++){switch_visibility(array[i],!1)}switch_visibility("_"+i,!0)}function switch_visibility(i,t){document.getElementById(i).style.display,document.getElementById(i).style.display=1==t?"block":"none"}
