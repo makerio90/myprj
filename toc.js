@@ -1,35 +1,19 @@
-function generatetoc() {
-    var toc = "";
-    var level = 0;
-
-    document.getElementById("contents").innerHTML =
-        document.getElementById("contents").innerHTML.replace(
-            /<h([\d])>([^<]+)<\/h([\d])>/gi,
-            function (str, openLevel, titleText, closeLevel) {
-                if (openLevel != closeLevel) {
-                    return str;
-                }
-
-                if (openLevel > level) {
-                    toc += (new Array(openLevel - level + 1)).join("<ul>");
-                } else if (openLevel < level) {
-                    toc += (new Array(level - openLevel + 1)).join("</ul>");
-                }
-
-                level = parseInt(openLevel);
-
-                var anchor = titleText.replace(/ /g, "_");
-                toc += "<li><a href=\"#" + anchor + "\">" + titleText
-                    + "</a></li>";
-
-                return "<h" + openLevel + "><a name=\"" + anchor + "\">"
-                    + titleText + "</a></h" + closeLevel + ">";
-            }
-        );
-
-    if (level) {
-        toc += (new Array(level + 1)).join("</ul>");
-    }
-
-    document.getElementById("toc").innerHTML += toc;
-};
+function toc() {
+    var ins = document.getElementById('_instructions')
+    var ell = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
+    var lst = ins.querySelectorAll(ell);
+    var html = '<ul>';
+    var indent = '';
+    lst.forEach((element) => {
+        indent = ell.indexOf(element.tagName);
+        for (let index = 0; index < indent; index++) {
+            html += "<ul>"
+        }
+        html += '<li>' + element.innerText + '</li>';
+        for (let index = 0; index < indent; index++) {
+            html += "</ul>"
+        }
+    });
+    html += '</ul>';
+    document.getElementById('toc').innerHTML = html
+}

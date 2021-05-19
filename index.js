@@ -10,6 +10,7 @@ function go() {
                 function (content) {
                     document.getElementById('_instructions').innerHTML =
                     marked(content);
+                    toc()
                 },
                 function (e) {
                     halfmoon.initStickyAlert({
