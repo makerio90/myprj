@@ -9,7 +9,13 @@ function toc() {
         for (let index = 0; index < indent; index++) {
             html += "<ul>"
         }
-        html += '<li>' + element.innerText + '</li>';
+        html += 
+        '<li><a class="hyperlink text-muted" href="#' +
+        element.innerText.toLowerCase().replace(/\s/g, '-').replace("/", '').replace(")", '')
+        + 
+        '">' +
+        element.innerText +
+        '</li>';
         for (let index = 0; index < indent; index++) {
             html += "</ul>"
         }
