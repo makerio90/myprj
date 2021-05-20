@@ -1,25 +1,36 @@
 function toc() {
-    var ins = document.getElementById('_instructions')
+    var ins = document.getElementById('_instructions');
     var ell = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
     var lst = ins.querySelectorAll(ell);
     var html = '<ul>';
-    var indent = '';
+    var IndentLevel = '';
     lst.forEach((element) => {
-        indent = ell.indexOf(element.tagName);
-        for (let index = 0; index < indent; index++) {
-            html += "<ul>"
+        var Indent = ell.indexOf(element.tagName);
+        var toindent = Indent - IndentLevel;
+        while (toindent != 0) {
+            if (toindent > 0) {
+                html += '<ul>';
+                toindent--
+                IndentLevel++;
+            }
+            if (toindent < 0) {
+                html += '</ul>';
+                toindent++;
+                IndentLevel--;
+            }
         }
-        html += 
+        
+        html +=
         '<li><a class="hyperlink text-muted" href="#' +
-        element.innerText.toLowerCase().replace(/\s/g, '-').replace("/", '').replace(")", '')
-        + 
+        element.innerText
+        .toLowerCase()
+        .replace(/\s/g, '-')
+        .replace('/', '')
+        .replace(')', '') +
         '">' +
         element.innerText +
         '</li>';
-        for (let index = 0; index < indent; index++) {
-            html += "</ul>"
-        }
     });
     html += '</ul>';
-    document.getElementById('toc').innerHTML = html
+    document.getElementById('_sidebar').innerHTML = html;
 }
