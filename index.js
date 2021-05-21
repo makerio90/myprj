@@ -9,7 +9,7 @@ function go() {
             .then(
                 function (content) {
                     document.getElementById('_instructions').innerHTML =
-                    marked(content);
+                    DOMPurify.sanitize(marked(content));
                     toc()
                     var _img = document.getElementById('_instructions').querySelectorAll("img")
                     for (let i = 0; i < _img.length; i++) {
@@ -18,14 +18,12 @@ function go() {
                     }
                     _img.forEach(element => {
                         var filename = element.src.substring(element.src.lastIndexOf('/')+1);
-                        console.log(element.id)
                         if(zip.file('images/' + filename) != null){
                         zip.file('images/' + filename)
                         .async('base64')
                         .then(
                             function (img) {
                                 document.getElementById(element.id).src = 'data:image/png;base64,' + img
-                                console.log(img)
                             },
                             function (e) {
                                 halfmoon.initStickyAlert({

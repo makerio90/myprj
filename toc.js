@@ -28,7 +28,7 @@ function toc() {
         .replace('/', '')
         .replace(')', '') +
         '">' +
-        element.innerText +
+        element.innerText.replace('<', '').replace('>', '') +
         '</li>';
     });
     html += '</ul>';
