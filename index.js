@@ -11,7 +11,34 @@ function go() {
                     document.getElementById('_instructions').innerHTML =
                     marked(content);
                     toc()
-                },
+                    var _img = document.getElementById('_instructions').querySelectorAll("img")
+                    for (let i = 0; i < _img.length; i++) {
+                        const element = _img[i];
+                        element.id = i
+                    }
+                    _img.forEach(element => {
+                        var filename = element.src.substring(element.src.lastIndexOf('/')+1);
+                        console.log(element.id)
+                        if(zip.file('images/' + filename) != null){
+                        zip.file('images/' + filename)
+                        .async('base64')
+                        .then(
+                            function (img) {
+                                document.getElementById(element.id).src = 'data:image/png;base64,' + img
+                                console.log(img)
+                            },
+                            function (e) {
+                                halfmoon.initStickyAlert({
+                                    content: e,
+                                    title: 'error getting instructions',
+                                    alertType: 'alert-danger',
+                                });
+                            }
+                            );} else{
+                                element.src = 'alt.png'
+                            }
+                        });
+                    },
                 function (e) {
                     halfmoon.initStickyAlert({
                         content: e,
@@ -50,8 +77,6 @@ function go() {
                         }
                         );
                         zip.folder('images').forEach(function (relativePath, file) {
-                            console
-                            .log('images/' + relativePath)
                             zip.file('images/' + relativePath)
                             .async('base64')
                             .then(
