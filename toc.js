@@ -1,5 +1,12 @@
-function toc() {
-    var ins = document.getElementById('_instructions');
+/**
+ * make a table of contens
+ * @param {element} ins - the thing you want to outline
+ * @return {string} - a html string
+ * @example
+ * var a = document.getElementByid('aRellylongdoc')
+ * document.getElementById('aSmallOutline').innerhtml = toc(a)
+ */
+function toc(ins) {
     var ell = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
     var lst = ins.querySelectorAll(ell);
     var html = '<ul>';
@@ -10,7 +17,7 @@ function toc() {
         while (toindent != 0) {
             if (toindent > 0) {
                 html += '<ul>';
-                toindent--
+                toindent--;
                 IndentLevel++;
             }
             if (toindent < 0) {
@@ -19,18 +26,18 @@ function toc() {
                 IndentLevel--;
             }
         }
-        
+
         html +=
-        '<li><a class="hyperlink text-muted" href="#' +
-        element.innerText
-        .toLowerCase()
-        .replace(/\s/g, '-')
-        .replace('/', '')
-        .replace(')', '') +
-        '">' +
-        element.innerText.replace('<', '').replace('>', '') +
-        '</li>';
+            '<li><a class="hyperlink text-muted" href="#' +
+            element.innerText
+                .toLowerCase()
+                .replace(/\s/g, '-')
+                .replace('/', '')
+                .replace(')', '') +
+            '">' +
+            element.innerText.replace('<', '').replace('>', '') +
+            '</li>';
     });
     html += '</ul>';
-    document.getElementById('_sidebar').innerHTML = html;
+    return html;
 }
