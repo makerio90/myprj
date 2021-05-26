@@ -89,7 +89,7 @@
                             };
                             xhr.onerror = function (e) {
                                 halfmoon.initStickyAlert({
-                                    content: "timed out",
+                                    content: "error: " + e,
                                     title: 'error getting source',
                                     alertType: 'alert-danger',
                                 });
@@ -125,7 +125,7 @@
                             };
                             xhr.onerror = function (e) {
                                 halfmoon.initStickyAlert({
-                                    content: "timed out",
+                                    content: "error: " + e,
                                     title: 'error getting source',
                                     alertType: 'alert-danger',
                                 });
