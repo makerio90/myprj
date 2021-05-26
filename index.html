@@ -37,6 +37,104 @@
         <div id="_sidebar" class="sidebar">
         </div>
         <div class="content-wrapper">
+            <div id="_index_" class="text-center mx-5">
+                <h1>
+                    myprj
+                </h1>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">url: </span>
+                    </div>
+                    <input type="text" class="form-control" id="url" placeholder="load from url">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" onclick="loadindex(document.getElementById('url').value)" type="button">load source</button>
+                    </div>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" onclick="goftomurl(document.getElementById('url').value)" type="button">load project</button>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>title</th>
+                                <th>description</th>
+                                <th>age</th>
+                                <th class="text-right"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="list">
+                        </tbody>
+                    </table>
+                </div>
+                <script>
+                    function goftomurl(url) {
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', url, true);
+                        xhr.responseType = 'blob';
+                        xhr.onload = function(e) {
+                            if (this.status == 200) {
+                                go(this.response)
+                            }else{
+                                halfmoon.initStickyAlert({
+                                    content: "server respoded with a " + this.status,
+                                    title: 'error getting source',
+                                    alertType: 'alert-danger',
+                                });
+                            }
+                            xhr.ontimeout = function (e) {
+                                halfmoon.initStickyAlert({
+                                    content: "timed out",
+                                    title: 'error getting source',
+                                    alertType: 'alert-danger',
+                                });
+                            };
+                            xhr.onerror = function (e) {
+                                halfmoon.initStickyAlert({
+                                    content: "timed out",
+                                    title: 'error getting source',
+                                    alertType: 'alert-danger',
+                                });
+                            };
+                        };
+                        xhr.send();
+                    }
+                    function loadindex(href){
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', href, true);
+                        xhr.responseType = 'text';
+                        xhr.onload = function(e) {
+                            if (this.status == 200) {
+                                var obj = JSON.parse(this.response)
+                                obj.forEach(element => {
+                                    var dir = href.substring(0, href.lastIndexOf('/')) + "/";
+                                    dir += element.url
+                                    document.getElementById('list').innerHTML += `<tr><td>${element.title}</td><td>${element.description}</td><td>${element.age}</td><td class="text-right"><a class="hyperlink text-muted" onclick="goftomurl('${dir}')">open</a></td></tr>`
+                                });
+                            }else{
+                                halfmoon.initStickyAlert({
+                                    content: "server respoded with a " + this.status,
+                                    title: 'error getting source',
+                                    alertType: 'alert-danger',
+                                });
+                            }
+                            xhr.ontimeout = function (e) {
+                                halfmoon.initStickyAlert({
+                                    content: "timed out",
+                                    title: 'error getting source',
+                                    alertType: 'alert-danger',
+                                });
+                            };
+                            xhr.onerror = function (e) {
+                                halfmoon.initStickyAlert({
+                                    content: "timed out",
+                                    title: 'error getting source',
+                                    alertType: 'alert-danger',
+                                });
+                            };
+                        };
+                        xhr.send();
+                    }
+                </script>
+            </div>
             <div id="_instructions">
             </div>
             <div id="_images">
@@ -83,3 +181,6 @@
     </div>
 </body>
 </html>
+<script>
+    _switch("index_")
+</script>

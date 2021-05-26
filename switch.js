@@ -7,6 +7,7 @@
 function _switch(i) {
     // all the pages
     var pages = [
+        '_index_',
         '_instructions',
         '_images',
         '_code',
