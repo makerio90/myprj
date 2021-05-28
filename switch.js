@@ -26,7 +26,7 @@ function _switch(i) {
     switch_visibility('_' + i, true);
 }
 /**
- *  switch the visibility of an ellement
+ *  switch the visibility of an element
  * @param {string} i -tle element you want to switch
  * @param {boolean} s - tun it on or off
  */

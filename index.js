@@ -1,6 +1,6 @@
-function go(fileupload) {
+function go(fileUpload) {
     new JSZip()
-        .loadAsync(fileupload, {checkCRC32: true, createFolders: true})
+        .loadAsync(fileUpload, {checkCRC32: true, createFolders: true})
         .then(
             function (zip) {
                 zip.file('INSTRUCTIONS.md')
@@ -8,7 +8,7 @@ function go(fileupload) {
                     .then(
                         function (content) {
                             var ins = document.getElementById('_instructions')
-                            // parse and prurify the markdown file, and write it to the page.
+                            // parse and purify the markdown file, and write it to the page.
                             ins.innerHTML = DOMPurify.sanitize(marked(content));
                             // make a outline
                             document.getElementById('_sidebar').innerHTML = toc(ins);
@@ -23,11 +23,11 @@ function go(fileupload) {
                             }
                             //fix the images
                             _img.forEach((element) => {
-                                // the src of the images is a full path, so we ghange that to just the filename
+                                // the src of the images is a full path, so we change that to just the filename
                                 var filename = element.src.substring(
                                     element.src.lastIndexOf('/') + 1
                                 );
-                                // if you get a file that dousent egsist, its value is null
+                                // if you get a file that doesn't exist, its value is null
                                 if (zip.file('images/' + filename) != null) {
                                     // get the file
                                     zip.file('images/' + filename)
@@ -50,8 +50,8 @@ function go(fileupload) {
                                             }
                                         );
                                 } else {
-                                    // if the image dousent exist, set it to alt.png
-                                    // this is to prevent pepole from using external sorces like imguar ang github
+                                    // if the image doesn't exist, set it to alt.png
+                                    // this is to prevent people from using external sources like imgur ang github
                                     element.src = 'alt.png';
                                 }
                             });
@@ -77,11 +77,7 @@ function go(fileupload) {
                                 'info-description'
                             ).innerHTML = obj.description;
                             obj.price =
-                                obj.priceformat +
-                                obj.price[0] +
-                                ' - ' +
-                                obj.priceformat +
-                                obj.price[1];
+                                `${obj.priceformat}${obj.price[0]} - ${obj.priceformat}${obj.price[1]}`;
                             document.getElementById('info-price').innerHTML =
                                 obj.price;
                             document.getElementById('info-date').innerHTML =

@@ -1,10 +1,10 @@
 /**
- * make a table of contens
+ * make a table of content
  * @param {element} ins - the thing you want to outline
  * @return {string} - a html string
  * @example
- * var a = document.getElementByid('aRellylongdoc')
- * document.getElementById('aSmallOutline').innerhtml = toc(a)
+ * var a = document.getElementById('aReallyLongDoc')
+ * document.getElementById('aSmallOutline').innerHTML = toc(a)
  */
 function toc(ins) {
     var ell = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
@@ -13,16 +13,16 @@ function toc(ins) {
     var IndentLevel = '';
     lst.forEach((element) => {
         var Indent = ell.indexOf(element.tagName);
-        var toindent = Indent - IndentLevel;
-        while (toindent != 0) {
-            if (toindent > 0) {
+        var toIndent = Indent - IndentLevel;
+        while (toIndent != 0) {
+            if (toIndent > 0) {
                 html += '<ul>';
-                toindent--;
+                toIndent--;
                 IndentLevel++;
             }
-            if (toindent < 0) {
+            if (toIndent < 0) {
                 html += '</ul>';
-                toindent++;
+                toIndent++;
                 IndentLevel--;
             }
         }
