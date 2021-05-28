@@ -47,10 +47,10 @@
                     </div>
                     <input type="text" class="form-control" id="url" placeholder="load from url">
                     <div class="input-group-append">
-                        <button class="btn btn-primary" onclick="loadindex(document.getElementById('url').value)" type="button">load source</button>
+                        <button class="btn btn-primary" onclick="loadIndex(document.getElementById('url').value)" type="button">load source</button>
                     </div>
                     <div class="input-group-append">
-                        <button class="btn btn-primary" onclick="goftomurl(document.getElementById('url').value)" type="button">load project</button>
+                        <button class="btn btn-primary" onclick="goFromUrl(document.getElementById('url').value)" type="button">load project</button>
                     </div>
                     <table class="table">
                         <thead>
@@ -66,7 +66,7 @@
                     </table>
                 </div>
                 <script>
-                    function goftomurl(url) {
+                    function goFromUrl(url) {
                         var xhr = new XMLHttpRequest();
                         xhr.open('GET', url, true);
                         xhr.responseType = 'blob';
@@ -75,7 +75,7 @@
                                 go(this.response)
                             }else{
                                 halfmoon.initStickyAlert({
-                                    content: "server respoded with a " + this.status,
+                                    content: "server responded with a " + this.status,
                                     title: 'error getting source',
                                     alertType: 'alert-danger',
                                 });
@@ -97,7 +97,7 @@
                         };
                         xhr.send();
                     }
-                    function loadindex(href){
+                    function loadIndex(href){
                         var xhr = new XMLHttpRequest();
                         xhr.open('GET', href, true);
                         xhr.responseType = 'text';
@@ -107,11 +107,11 @@
                                 obj.forEach(element => {
                                     var dir = href.substring(0, href.lastIndexOf('/')) + "/";
                                     dir += element.url
-                                    document.getElementById('list').innerHTML += `<tr><td>${element.title}</td><td>${element.description}</td><td>${element.age}</td><td class="text-right"><a class="hyperlink text-muted" onclick="goftomurl('${dir}')">open</a></td></tr>`
+                                    document.getElementById('list').innerHTML += `<tr><td>${element.title}</td><td>${element.description}</td><td>${element.age}</td><td class="text-right"><a class="hyperlink text-muted" onclick="goFromUrl('${dir}')">open</a></td></tr>`
                                 });
                             }else{
                                 halfmoon.initStickyAlert({
-                                    content: "server respoded with a " + this.status,
+                                    content: "server responded with a " + this.status,
                                     title: 'error getting source',
                                     alertType: 'alert-danger',
                                 });
