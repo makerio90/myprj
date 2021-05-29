@@ -67,6 +67,7 @@
                 </div>
                 <script>
                     function goFromUrl(url) {
+                        console.log('loading from url: ' + url)
                         var xhr = new XMLHttpRequest();
                         xhr.open('GET', url, true);
                         xhr.responseType = 'blob';

@@ -7,6 +7,7 @@ function go(fileUpload) {
                     .async('string')
                     .then(
                         function (content) {
+                            content.replace('<', '\<');
                             var ins = document.getElementById('_instructions')
                             // parse and purify the markdown file, and write it to the page.
                             ins.innerHTML = DOMPurify.sanitize(marked(content));
@@ -52,7 +53,16 @@ function go(fileUpload) {
                                 } else {
                                     // if the image doesn't exist, set it to alt.png
                                     // this is to prevent people from using external sources like imgur ang github
-                                    element.src = 'alt.png';
+                                    var alt_images = [
+										'images/alt-green.png',
+										'images/alt-blue.png',
+										'images/alt-red.png',
+										'images/alt-yellow.png',
+									];
+                                    const randIndex = Math.floor(
+										Math.random() * alt_images.length
+									);
+                                    element.src = alt_images[randIndex];
                                 }
                             });
                         },
@@ -83,7 +93,7 @@ function go(fileUpload) {
                             document.getElementById('info-date').innerHTML =
                                 obj.date;
                         },
-                        function (e) {
+                         function (e) {
                             halfmoon.initStickyAlert({
                                 content: e,
                                 title: 'error getting info',
