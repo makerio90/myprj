@@ -18,16 +18,16 @@
         <nav class="navbar justify-content-between">
             <div class="custom-file d-flex mr-10">
                 <input type="file" id="prj-input-1">
-                <label for="prj-input-1">Choose a file</label>
+                <label for="prj-input-1">import</label>
             </div>
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button class="btn" type="button" onclick="_switch('instructions')">instructions</button>
                 <button class="btn" type="button" onclick="_switch('images')">images</button>
-                <button class="btn" type="button" onclick="_switch('code')">code</button>
-                <button class="btn" type="button" onclick="_switch('3d')">3d</button>
-                <button class="btn" type="button" onclick="_switch('pcbs')">pcbs</button>
-                <button class="btn" type="button" onclick="_switch('sch')">sch</button>
-                <button class="btn" type="button" onclick="_switch('bom')">bom</button>
+                <button class="btn" type="button" onclick="_switch('code')" style="display: none;">code</button>
+                <button class="btn" type="button" onclick="_switch('3d')" style="display: none;">3d</button>
+                <button class="btn" type="button" onclick="_switch('pcbs')" style="display: none;">pcbs</button>
+                <button class="btn" type="button" onclick="_switch('sch')" style="display: none;">sch</button>
+                <button class="btn" type="button" onclick="_switch('bom')" style="display: none;">bom</button>
                 <button class="btn" type="button" onclick="_switch('info')">info</button>
             </div>
             <button class="btn btn-danger" onclick="go(document.getElementById('prj-input-1').files[0])" type="button">go</button>
