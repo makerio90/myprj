@@ -7,8 +7,12 @@ function go(fileUpload) {
 					.async('string')
 					.then(
 						function (content) {
-							content.replace('<', '<');
-							var ins = document.getElementById('_instructions');
+							content = content.replace('<', '<');
+							if (getCookie("allowProfanity") = "true"){
+								content = removeProfanity(content)
+							}
+								var ins =
+									document.getElementById('_instructions');
 							// parse and purify the markdown file, and write it to the page.
 							ins.innerHTML = DOMPurify.sanitize(marked(content));
 							// make a outline
