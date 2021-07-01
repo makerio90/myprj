@@ -1,190 +1,249 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <link   href="./halfmoon-1.1.1/css/halfmoon.min.css" rel="stylesheet" />
-    <script src="./halfmoon-1.1.1/js/halfmoon.min.js"></script>
-    <script src="./jszip/dist/jszip.min.js"></script>
-    <script src="./index.js"></script>
-    <script src="./marked-master/marked.min.js"></script>
-    <script src="./switch.js"></script>
-    <script src="./toc.js"></script>
-    <script src="./DOMPurify-main/dist/purify.min.js"></script>
-    <script src="./getCookie.js"></script>
-    <script src="./badWords.js"></script>
-    <script src="./profanityfilter.js"></script>
-    <meta charset="UTF-8">
-    <title>myprj</title>
-</head>
-<body data-dm-shortcut-enabled="true" data-sidebar-shortcut-enabled="true"  data-set-preferred-mode-onload="true" class="with-custom-webkit-scrollbars with-custom-css-scrollbars">
-    <div class="page-wrapper with-navbar with-sidebar" data-sidebar-type="overlayed-sm-and-down">
-        <div class="sticky-alerts"></div>
-        <nav class="navbar justify-content-between">
-            <div class="custom-file d-flex mr-10">
-                <input type="file" id="prj-input-1">
-                <label for="prj-input-1">import</label>
-            </div>
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <button class="btn" type="button" onclick="_switch('instructions')">instructions</button>
-                <button class="btn" type="button" onclick="_switch('images')">images</button>
-                <button class="btn" type="button" onclick="_switch('code')" style="display: none;">code</button>
-                <button class="btn" type="button" onclick="_switch('3d')" style="display: none;">3d</button>
-                <button class="btn" type="button" onclick="_switch('pcbs')" style="display: none;">pcbs</button>
-                <button class="btn" type="button" onclick="_switch('sch')" style="display: none;">sch</button>
-                <button class="btn" type="button" onclick="_switch('bom')" style="display: none;">parts</button>
-                <button class="btn" type="button" onclick="_switch('info')">info</button>
-            </div>
-            <button class="btn btn-danger" onclick="go(document.getElementById('prj-input-1').files[0])" type="button">go</button>
-            
-        </nav>
-        <div class="sidebar-overlay" onclick="halfmoon.toggleSidebar()"></div>
-        <div id="_sidebar" class="sidebar">
-        </div>
-        <div class="content-wrapper">
-            <div id="_index_" class="text-center mx-5">
-                <h1>
-                    myprj
-                </h1>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">url: </span>
-                    </div>
-                    <input type="text" class="form-control" id="url" placeholder="load from url">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" onclick="loadIndex(document.getElementById('url').value)" type="button">load source</button>
-                    </div>
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" onclick="goFromUrl(document.getElementById('url').value)" type="button">load project</button>
-                    </div>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>title</th>
-                                <th>description</th>
-                                <th>age</th>
-                                <th class="text-right"></th>
-                            </tr>
-                        </thead>
-                        <tbody id="list">
-                        </tbody>
-                    </table>
-                </div>
-                <script>
-                    function goFromUrl(url) {
-                        console.log('loading from url: ' + url)
-                        var xhr = new XMLHttpRequest();
-                        xhr.open('GET', url, true);
-                        xhr.responseType = 'blob';
-                        xhr.onload = function(e) {
-                            if (this.status == 200) {
-                                go(this.response)
-                            }else{
-                                halfmoon.initStickyAlert({
-                                    content: "server responded with a " + this.status,
-                                    title: 'error getting source',
-                                    alertType: 'alert-danger',
-                                });
-                            }
-                            xhr.ontimeout = function (e) {
-                                halfmoon.initStickyAlert({
-                                    content: "timed out",
-                                    title: 'error getting source',
-                                    alertType: 'alert-danger',
-                                });
-                            };
-                            xhr.onerror = function (e) {
-                                halfmoon.initStickyAlert({
-                                    content: "error: " + e,
-                                    title: 'error getting source',
-                                    alertType: 'alert-danger',
-                                });
-                            };
-                        };
-                        xhr.send();
-                    }
-                    function loadIndex(href){
-                        var xhr = new XMLHttpRequest();
-                        xhr.open('GET', href, true);
-                        xhr.responseType = 'text';
-                        xhr.onload = function(e) {
-                            if (this.status == 200) {
-                                var obj = JSON.parse(this.response)
-                                obj.forEach(element => {
-                                    var dir = href.substring(0, href.lastIndexOf('/')) + "/";
-                                    dir += element.url
-                                    document.getElementById('list').innerHTML += `<tr><td>${element.title}</td><td>${element.description}</td><td>${element.age}</td><td class="text-right"><a class="hyperlink text-muted" onclick="goFromUrl('${dir}')">open</a></td></tr>`
-                                });
-                            }else{
-                                halfmoon.initStickyAlert({
-                                    content: "server responded with a " + this.status,
-                                    title: 'error getting source',
-                                    alertType: 'alert-danger',
-                                });
-                            }
-                            xhr.ontimeout = function (e) {
-                                halfmoon.initStickyAlert({
-                                    content: "timed out",
-                                    title: 'error getting source',
-                                    alertType: 'alert-danger',
-                                });
-                            };
-                            xhr.onerror = function (e) {
-                                halfmoon.initStickyAlert({
-                                    content: "error: " + e,
-                                    title: 'error getting source',
-                                    alertType: 'alert-danger',
-                                });
-                            };
-                        };
-                        xhr.send();
-                    }
-                </script>
-            </div>
-            <div id="_instructions">
-            </div>
-            <div id="_images">
-                
-            </div>
-            <div id="_code">
-                
-            </div>
-            <div id="_3d">
-                
-            </div>
-            <div id="_pcbs">
-                
-            </div>
-            <div id="_sch">
-                
-            </div>
-            <div id="_bom">
-                
-            </div>
-            <div id="_info">
-                <table class="table">
-                    <tbody>
-                        <tr>
-                            <th>title</th>
-                            <td class="text-right" id="info-title">example</td>
-                        </tr>
-                        <tr>
-                            <th>description</th>
-                            <td class="text-right" id="info-description">description</td>
-                        </tr>
-                        <tr>
-                            <th>price</th>
-                            <td class="text-right" id="info-price">price</td>
-                        </tr>
-                        <tr>
-                            <th>created</th>
-                            <td class="text-right" id="info-date">date the project was created</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</body>
+	<head>
+		<link href="./halfmoon-1.1.1/css/halfmoon.min.css" rel="stylesheet" />
+		<script src="./halfmoon-1.1.1/js/halfmoon.min.js"></script>
+		<script src="./jszip/dist/jszip.min.js"></script>
+		<script src="./index.js"></script>
+		<script src="./marked-master/marked.min.js"></script>
+		<script src="./switch.js"></script>
+		<script src="./toc.js"></script>
+		<script src="./DOMPurify-main/dist/purify.min.js"></script>
+		<script src="./getCookie.js"></script>
+		<script src="./badWords.js"></script>
+		<script src="./profanityfilter.js"></script>
+		<meta charset="UTF-8" />
+		<title>myprj</title>
+	</head>
+	<body
+		data-dm-shortcut-enabled="true"
+		data-sidebar-shortcut-enabled="true"
+		data-set-preferred-mode-onload="true"
+		class="with-custom-webkit-scrollbars with-custom-css-scrollbars"
+	>
+		<div
+			class="page-wrapper with-navbar with-sidebar"
+			data-sidebar-type="overlayed-sm-and-down"
+		>
+			<div class="sticky-alerts"></div>
+			<nav class="navbar justify-content-between">
+				<div class="custom-file d-flex mr-10">
+					<input type="file" id="prj-input-1" />
+					<label for="prj-input-1">import</label>
+				</div>
+				<div class="btn-group" role="group" aria-label="Basic example">
+					<button
+						class="btn"
+						type="button"
+						onclick="_switch('instructions')"
+					>
+						Instructions
+					</button>
+					<button
+						class="btn"
+						type="button"
+						onclick="_switch('images')"
+					>
+						Images
+					</button>
+					<button
+						class="btn"
+						type="button"
+						onclick="_switch('code')"
+						style="display: none"
+					>
+						Code
+					</button>
+					<button
+						class="btn"
+						type="button"
+						onclick="_switch('3d')"
+						style="display: none"
+					>
+						Files
+					</button>
+					<button class="btn" type="button" onclick="_switch('info')">
+						Info
+					</button>
+				</div>
+				<button
+					class="btn btn-danger"
+					onclick="go(document.getElementById('prj-input-1').files[0])"
+					type="button"
+				>
+					go
+				</button>
+			</nav>
+			<div
+				class="sidebar-overlay"
+				onclick="halfmoon.toggleSidebar()"
+			></div>
+			<div id="_sidebar" class="sidebar"></div>
+			<div class="content-wrapper">
+				<div id="_index_" class="text-center mx-5">
+					<h1>myprj</h1>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">url: </span>
+						</div>
+						<input
+							type="text"
+							class="form-control"
+							id="url"
+							placeholder="load from url"
+						/>
+						<div class="input-group-append">
+							<button
+								class="btn btn-primary"
+								onclick="loadIndex(document.getElementById('url').value)"
+								type="button"
+							>
+								load source
+							</button>
+						</div>
+						<div class="input-group-append">
+							<button
+								class="btn btn-primary"
+								onclick="goFromUrl(document.getElementById('url').value)"
+								type="button"
+							>
+								load project
+							</button>
+						</div>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>title</th>
+									<th>description</th>
+									<th>age</th>
+									<th class="text-right"></th>
+								</tr>
+							</thead>
+							<tbody id="list"></tbody>
+						</table>
+					</div>
+					<script>
+						function goFromUrl(url) {
+							console.log('loading from url: ' + url);
+							var xhr = new XMLHttpRequest();
+							xhr.open('GET', url, true);
+							xhr.responseType = 'blob';
+							xhr.onload = function (e) {
+								if (this.status == 200) {
+									go(this.response);
+								} else {
+									halfmoon.initStickyAlert({
+										content:
+											'server responded with a ' +
+											this.status,
+										title: 'error getting source',
+										alertType: 'alert-danger',
+									});
+								}
+								xhr.ontimeout = function (e) {
+									halfmoon.initStickyAlert({
+										content: 'timed out',
+										title: 'error getting source',
+										alertType: 'alert-danger',
+									});
+								};
+								xhr.onerror = function (e) {
+									halfmoon.initStickyAlert({
+										content: 'error: ' + e,
+										title: 'error getting source',
+										alertType: 'alert-danger',
+									});
+								};
+							};
+							xhr.send();
+						}
+						function loadIndex(href) {
+							var xhr = new XMLHttpRequest();
+							xhr.open('GET', href, true);
+							xhr.responseType = 'text';
+							xhr.onload = function (e) {
+								if (this.status == 200) {
+									var obj = JSON.parse(this.response);
+									obj.forEach((element) => {
+										var dir =
+											href.substring(
+												0,
+												href.lastIndexOf('/')
+											) + '/';
+										dir += element.url;
+										document.getElementById(
+											'list'
+										).innerHTML += `<tr><td>${element.title}</td><td>${element.description}</td><td>${element.age}</td><td class="text-right"><a class="hyperlink text-muted" onclick="goFromUrl('${dir}')">open</a></td></tr>`;
+									});
+								} else {
+									halfmoon.initStickyAlert({
+										content:
+											'server responded with a ' +
+											this.status,
+										title: 'error getting source',
+										alertType: 'alert-danger',
+									});
+								}
+								xhr.ontimeout = function (e) {
+									halfmoon.initStickyAlert({
+										content: 'timed out',
+										title: 'error getting source',
+										alertType: 'alert-danger',
+									});
+								};
+								xhr.onerror = function (e) {
+									halfmoon.initStickyAlert({
+										content: 'error: ' + e,
+										title: 'error getting source',
+										alertType: 'alert-danger',
+									});
+								};
+							};
+							xhr.send();
+						}
+					</script>
+				</div>
+				<div id="_instructions"></div>
+				<div id="_images"></div>
+				<div id="_code"></div>
+				<div id="_3d"></div>
+				<div id="_pcbs"></div>
+				<div id="_sch"></div>
+				<div id="_bom"></div>
+				<div id="_info">
+					<table class="table">
+						<tbody>
+							<tr>
+								<th>title</th>
+								<td class="text-right" id="info-title">
+									example
+								</td>
+							</tr>
+							<tr>
+								<th>description</th>
+								<td class="text-right" id="info-description">
+									description
+								</td>
+							</tr>
+							<tr>
+								<th>price</th>
+								<td class="text-right" id="info-price">
+									price
+								</td>
+							</tr>
+							<tr>
+								<th>created</th>
+								<td class="text-right" id="info-date">
+									date the project was created
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</body>
 </html>
 <script>
-    _switch("index_")
+	_switch('index_');
 </script>
