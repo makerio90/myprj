@@ -8,9 +8,9 @@ function go(fileUpload) {
 					.then(
 						function (content) {
 							content = content.replace('<', '<');
-							if (getCookie("allowProfanity") = "true"){
+							/*if (getCookie("allowProfanity") = "true"){
 								content = removeProfanity(content)
-							}
+							}*/
 								var ins =
 									document.getElementById('_instructions');
 							// parse and purify the markdown file, and write it to the page.
