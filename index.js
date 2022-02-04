@@ -8,6 +8,7 @@ function go(fileUpload) {
 					.then(
 						function (content) {
 							content = content.replace('<', '<');
+							//removed - dosent work, dont know why, dont care enough to fix or optimise. 
 							/*if (getCookie("allowProfanity") = "true"){
 								content = removeProfanity(content)
 							}*/
@@ -41,11 +42,8 @@ function go(fileUpload) {
 										.then(
 											function (img) {
 												// render the image
-												document.getElementById(
-													element.id
-												).src =
-													'data:image/png;base64,' +
-													img;
+												document.getElementById(element.id).src = 'data:image/png;base64,' + img;
+												document.getElementById(element.id).width = "1080px";
 											},
 											function (e) {
 												halfmoon.initStickyAlert({
@@ -136,4 +134,5 @@ function go(fileUpload) {
 				});
 			}
 		);
+		_switch('images');
 }

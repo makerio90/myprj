@@ -1,74 +1,8 @@
 [
     {
-        "title": "example 1",
-        "description": "desc-example 1",
-        "age": "3m",
+        "title": "example file 1",
+        "description": "tests basic functionality",
+        "age": "Wed May 12 2021 18:48:52",
         "url": "test.myprj"
-    },
-    {
-        "title": "example 2",
-        "description": "desc-example 2",
-        "age": "2y",
-        "url": "index.json"
-    },
-    {
-        "title": "example 2",
-        "description": "desc-example 2",
-        "age": "2y",
-        "url": "index.json"
-    },
-    {
-        "title": "example 2",
-        "description": "desc-example 2",
-        "age": "2y",
-        "url": "index.json"
-    },
-    {
-        "title": "example 2",
-        "description": "desc-example 2",
-        "age": "2y",
-        "url": "index.json"
-    },
-    {
-        "title": "example 2",
-        "description": "desc-example 2",
-        "age": "2y",
-        "url": "index.json"
-    },
-    {
-        "title": "example 2",
-        "description": "desc-example 2",
-        "age": "2y",
-        "url": "index.json"
-    },
-    {
-        "title": "example 2",
-        "description": "desc-example 2",
-        "age": "2y",
-        "url": "index.json"
-    },
-    {
-        "title": "example 2",
-        "description": "desc-example 2",
-        "age": "2y",
-        "url": "index.json"
-    },
-    {
-        "title": "example 2",
-        "description": "desc-example 2",
-        "age": "2y",
-        "url": "index.json"
-    },
-    {
-        "title": "example 2",
-        "description": "desc-example 2",
-        "age": "2y",
-        "url": "index.json"
-    },
-    {
-        "title": "example 2",
-        "description": "desc-example 2",
-        "age": "2y",
-        "url": "index.json"
     }
 ]
