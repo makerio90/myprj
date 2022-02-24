@@ -14,8 +14,23 @@
 		<script src="./profanityfilter.js"></script>
 		<meta charset="UTF-8" />
 		<title>myprj</title>
+		<style>
+			img {
+				max-width: 100%;
+				height: auto;
+				width: auto\9; /* ie8 */
+			}
+			.grid-container {
+				display: grid;
+			}
+		</style>
 	</head>
-	<body data-dm-shortcut-enabled="true" data-sidebar-shortcut-enabled="true" data-set-preferred-mode-onload="true" class="with-custom-webkit-scrollbars with-custom-css-scrollbars">
+	<body
+		data-dm-shortcut-enabled="true"
+		data-sidebar-shortcut-enabled="true"
+		data-set-preferred-mode-onload="true"
+		class="with-custom-webkit-scrollbars with-custom-css-scrollbars"
+	>
 		<div
 			class="page-wrapper with-navbar with-sidebar"
 			data-sidebar-type="overlayed-sm-and-down"
@@ -23,26 +38,40 @@
 			<div class="sticky-alerts"></div>
 			<nav class="navbar justify-content-between">
 				<div class="custom-file d-flex mr-10">
-					<input type="file" id="prj-input-1" accept="*.myprj"/>
+					<input type="file" id="prj-input-1" accept="*.myprj" />
 					<label for="prj-input-1">import</label>
 				</div>
 				<div class="btn-group" role="group" aria-label="Basic example">
-					<button class="btn" type="button" onclick="_switch('instructions')" id="instructions">
+					<button
+						class="btn"
+						type="button"
+						onclick="_switch('instructions')"
+						id="instructions"
+					>
 						Instructions
 					</button>
-					<button class="btn" type="button" onclick="_switch('images')" id="images" >
+					<button
+						class="btn"
+						type="button"
+						onclick="_switch('images')"
+						id="images"
+					>
 						Images
 					</button>
-					<button class="btn" type="button" onclick="_switch('info')" id="info">
+					<button
+						class="btn"
+						type="button"
+						onclick="_switch('info')"
+						id="info"
+					>
 						Info
 					</button>
 				</div>
 				<button
 					class="btn btn-danger"
-					onclick="go(document.getElementById('prj-input-1').files[0])"
 					type="button"
 				>
-					go
+					settings (not implemented)
 				</button>
 			</nav>
 			<div
@@ -55,7 +84,13 @@
 					<h1>myprj</h1>
 				</div>
 				<div id="_instructions"></div>
-				<div id="_images"></div>
+				<div id="_images">
+					<div class="container-fluid">
+						<div id="_images_grid" class="row">
+
+						</div>
+					</div>
+				</div>
 				<div id="_code"></div>
 				<div id="_3d"></div>
 				<div id="_pcbs"></div>
@@ -95,9 +130,3 @@
 		</div>
 	</body>
 </html>
-<script>
-	_switch('index_');
-	window.onload = function() {
-		document.getElementsByClassName("file-names")[0].style.display = "none"
-	}
-</script>
