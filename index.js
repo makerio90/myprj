@@ -1,9 +1,6 @@
 window.onload = function () {
 	document.getElementsByClassName('file-names')[0].style.display = 'none';
-
 	var fileUpload = document.getElementById('prj-input-1');
-	console.log(fileUpload);
-	
 	fileUpload.onchange = function () {
 		try {
 			new JSZip()
@@ -48,35 +45,33 @@ window.onload = function () {
 									});
 								}
 							);
-						zip.file('OBJECT')
-							.async('string')
-							.then(
-								function (content) {
-									// parse the object
-									var obj = JSON.parse(content);
-									// fill the info page
-									document.getElementById(
-										'info-title'
-									).innerHTML = obj.title;
-									document.getElementById(
-										'info-description'
-									).innerHTML = obj.description;
-									obj.price = `${obj.priceformat}${obj.price[0]} - ${obj.priceformat}${obj.price[1]}`;
-									document.getElementById(
-										'info-price'
-									).innerHTML = obj.price;
-									document.getElementById(
-										'info-date'
-									).innerHTML = obj.date;
-								},
-								function (e) {
-									halfmoon.initStickyAlert({
-										content: e,
-										title: 'error getting info',
-										alertType: 'alert-danger',
-									});
-								}
-							);
+						zip.file('OBJECT').async('string').then(content => {
+							// parse the object
+							var obj = JSON.parse(content);
+							// fill the info page
+							document.getElementById('info-title').innerHTML =
+								obj.title;
+
+							document.getElementById(
+								'info-description'
+							).innerHTML = obj.description;
+
+							obj.price = `${obj.priceformat}${obj.price[0]} - ${obj.priceformat}${obj.price[1]}`;
+
+							document.getElementById('info-price').innerHTML =
+								obj.price;
+
+							document.getElementById('info-date').innerHTML =
+								obj.date;
+						},
+						function (e) {
+							halfmoon.initStickyAlert({
+								content: e,
+								title: 'error getting info',
+								alertType: 'alert-danger',
+							})
+						});
+
 						images(zip);
 					},
 					function (e) {
@@ -102,6 +97,29 @@ window.onload = function () {
  * @param {element array} img - an array of the images that you want fixing
  * @param {object} zip - a jszip object to source the files from
  */
+function metadata(content){
+	// parse the object
+	var obj = JSON.parse(content);
+	// fill the info page
+	document.getElementById(
+		'info-title'
+	).innerHTML = obj.title;
+
+	document.getElementById(
+		'info-description'
+	).innerHTML = obj.description;
+
+	obj.price = `${obj.priceformat}${obj.price[0]} - ${obj.priceformat}${obj.price[1]}`;
+
+	document.getElementById(
+		'info-price'
+	).innerHTML = obj.price;
+
+	document.getElementById(
+		'info-date'
+	).innerHTML = obj.date;
+
+}
 function imageFixer(img, zip) {
 	// give the images an id
 	for (let i = 0; i < img.length; i++) {
