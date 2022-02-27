@@ -67,10 +67,7 @@
 						Info
 					</button>
 				</div>
-				<button
-					class="btn btn-danger"
-					type="button"
-				>
+				<button class="btn btn-danger" type="button">
 					settings (not implemented)
 				</button>
 			</nav>
@@ -80,23 +77,25 @@
 			></div>
 			<div id="_sidebar" class="sidebar"></div>
 			<div class="content-wrapper">
-				<div id="_index_" class="text-center mx-5">
-					<h1>myprj</h1>
+				<div id="_index_">
+					<h1 class="text-center mx-5">myprj</h1>
+					<div id="js-warning" class="alert alert-danger" role="alert">
+						<h4 class="alert-heading">javascript disabled</h4>
+						if your seeing this, it is because javascript is disabled. you need to enable javascript in order for this site to work.
+					</div>
 				</div>
 				<div id="_instructions"></div>
 				<div id="_images">
 					<div class="container-fluid">
-						<div id="_images_grid" class="row">
-
-						</div>
+						<div id="_images_grid" class="row"></div>
 					</div>
 				</div>
-				<div id="_code"></div>
-				<div id="_3d"></div>
-				<div id="_pcbs"></div>
-				<div id="_sch"></div>
-				<div id="_bom"></div>
-				<div id="_info">
+				<div style="display: none" id="_code"></div>
+				<div style="display: none" id="_3d"></div>
+				<div style="display: none" id="_pcbs"></div>
+				<div style="display: none" id="_sch"></div>
+				<div style="display: none" id="_bom"></div>
+				<div style="display: none" id="_info">
 					<table class="table">
 						<tbody>
 							<tr>

@@ -1,4 +1,5 @@
 window.onload = function () {
+	document.getElementById('js-warning').remove()
 	document.getElementsByClassName('file-names')[0].style.display = 'none';
 	var fileUpload = document.getElementById('prj-input-1');
 	fileUpload.onchange = function () {
@@ -10,6 +11,32 @@ window.onload = function () {
 				})
 				.then(
 					function (zip) {
+						zip.file('OBJECT').async('string').then(content => {
+							// parse the object
+							var obj = JSON.parse(content);
+							// fill the info page
+							document.getElementById('info-title').innerHTML =
+								obj.title;
+							document.title = obj.title + " - myprj"
+							document.getElementById(
+								'info-description'
+							).innerHTML = obj.description;
+
+							obj.price = `${obj.priceformat}${obj.price[0]} - ${obj.priceformat}${obj.price[1]}`;
+
+							document.getElementById('info-price').innerHTML =
+								obj.price;
+
+							document.getElementById('info-date').innerHTML =
+								obj.date;
+						},
+						function (e) {
+							halfmoon.initStickyAlert({
+								content: e,
+								title: 'error getting info',
+								alertType: 'alert-danger',
+							})
+						});
 						zip.file('INSTRUCTIONS')
 							.async('string')
 							.then(
@@ -45,32 +72,7 @@ window.onload = function () {
 									});
 								}
 							);
-						zip.file('OBJECT').async('string').then(content => {
-							// parse the object
-							var obj = JSON.parse(content);
-							// fill the info page
-							document.getElementById('info-title').innerHTML =
-								obj.title;
-
-							document.getElementById(
-								'info-description'
-							).innerHTML = obj.description;
-
-							obj.price = `${obj.priceformat}${obj.price[0]} - ${obj.priceformat}${obj.price[1]}`;
-
-							document.getElementById('info-price').innerHTML =
-								obj.price;
-
-							document.getElementById('info-date').innerHTML =
-								obj.date;
-						},
-						function (e) {
-							halfmoon.initStickyAlert({
-								content: e,
-								title: 'error getting info',
-								alertType: 'alert-danger',
-							})
-						});
+						
 
 						images(zip);
 					},
