@@ -12,6 +12,7 @@
 		<script src="./getCookie.js"></script>
 		<script src="./badWords.js"></script>
 		<script src="./profanityfilter.js"></script>
+		<link rel="stylesheet" href="./fontawesome-free-6.0.0-web/css/all.css">
 		<meta charset="UTF-8" />
 		<title>myprj</title>
 		<style>
@@ -39,7 +40,7 @@
 			<nav class="navbar justify-content-between">
 				<div class="custom-file d-flex mr-10">
 					<input type="file" id="prj-input-1" accept="*.myprj" />
-					<label for="prj-input-1">import</label>
+					<label for="prj-input-1"><i class="fa-solid fa-file-arrow-up"></i></label>
 				</div>
 				<div class="btn-group" role="group" aria-label="Basic example">
 					<button
@@ -48,7 +49,7 @@
 						onclick="_switch('instructions')"
 						id="instructions"
 					>
-						Instructions
+						<i class="fa-solid fa-file"></i>
 					</button>
 					<button
 						class="btn"
@@ -56,7 +57,7 @@
 						onclick="_switch('images')"
 						id="images"
 					>
-						Images
+						<i class="fa-solid fa-images"></i>
 					</button>
 					<button
 						class="btn"
@@ -64,11 +65,11 @@
 						onclick="_switch('info')"
 						id="info"
 					>
-						Info
+						<i class="fa-solid fa-circle-info"></i>
 					</button>
 				</div>
-				<button class="btn btn-danger" type="button">
-					settings (not implemented)
+				<button class="btn btn-danger px-md-10" type="button">
+					<i class="fa-solid fa-gears"></i>
 				</button>
 			</nav>
 			<div
